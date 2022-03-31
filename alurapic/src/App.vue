@@ -1,48 +1,34 @@
 <template>
-  <div>
-    <h1>{{ titulo }}</h1>
 
-    <ul>
-      <li v-for="foto of fotos" v-bind:key="foto">
-        <img v-bind:src="foto.url" v-bind:alt="foto.titulo">
+  <div class="corpo">
+    <h1 class="centralizado">{{ titulo }}</h1>
+    
+    <ul class="lista-fotos">
+      <li class="lista-fotos-item" v-for="foto of fotos" v-bind:key="foto">
+
+        <meu-painel v-bind:titulo="foto.titulo">
+          <img class="imagem-responsiva" v-bind:src="foto.url" v-bind:alt="foto.titulo">
+        </meu-painel>
+
       </li>
     </ul>
-
-    <!--
-      também pode ser escrito da seguinte maneira
-      <h1 v-text="titulo"></h1>
-    -->
-    <!--
-      <img v-bind:src="foto.url" v-bind:alt="foto.titulo">
-      a linha acima pode ser resumida a seguinte:
-      <img :src="foto.url" :alt="foto.titulo">
-    -->
   </div>
+
 </template>
 
 <script>
+import Painel from './components/shared/painel/Painel.vue';
+
 export default {
+
+  components: {
+    'meu-painel': Painel
+  },
 
   data() {
     return {
       titulo: 'AluraPic',
       fotos: []
-      /*
-      fotos: [
-        {
-          url: 'https://www.petelegante.com.br/dicas/wp-content/uploads/2018/07/ado%C3%A7%C3%A3o-de-cachorro-filhote-750x400.jpg',
-          titulo: 'cachorrinho olhando para a câmera'
-        },
-        {
-          url: 'https://www.petlove.com.br/dicas/wp-content/uploads/2018/03/bigodes-de-gato-2-1.jpg',
-          titulo: 'gatinho olhando para a câmera'
-        },
-        {
-          url: 'https://www.portaldospassaros.com.br/wp-content/uploads/2018/10/2310_canto-da-calopsita-1000x516.jpg',
-          titulo: 'calopsita empoleirada em um galho'
-        }
-      ]
-      */
     }
   },
 
@@ -64,5 +50,27 @@ export default {
 </script>
 
 <style>
+
+  .corpo {
+    font-family: Helvetica, sans-serif;
+    width: 96%;
+    margin: 0 auto;
+  }
+
+  .centralizado {
+    text-align: center;
+  }
+
+  .lista-fotos {
+    list-style: none;
+  }
+
+  .lista-fotos .lista-fotos-item {
+    display: inline-block;
+  }
+
+  .imagem-responsiva {
+    width: 100%;
+  }
 
 </style>
